@@ -1,0 +1,41 @@
+pathname: credit:start-preview
+title: クレジット付き評価モジュール：start(プレビュー用)
+source: https://scp-jp.wikidot.com/credit:start-preview
+-----
+[[module css]]
+@import url('https://scp-jp.github.io/files/util/common/credit/style/style.css');
+
+.creditRate.no-rate .page-rate-widget-box {
+    visibility:hidden;
+}
+
+.creditRate.creditModule.no-rate ~ #u-credit-view .creditBottomRate > div:nth-of-type(2) {
+    display; none;
+}
+[[/module]]
+
+[[div_ class="creditRate creditModule {$mode}"]]
+[[div_ class="rateBox"]]
+[[div_ class="rate-box-with-credit-button"]]
+[[module Rate]]
+[[div_ class="creditButton"]]
+[[a href="#u-credit-view" class="fa fa-info" style="position:relative;"]][[image http://scp-jp.wikidot.com/local--files/nav:side/blank.png title="クレジットを表示する" style="position:absolute;height:100%;width:100%;top:0;left:0;"]][[/a]]
+[[/div]]
+[[/div]]
+[[/div]]
+[[/div]]
+
+[[div_ style="clear:both;"]]
+[[/div]]
+
+[[div_ id="credit-view"]]
+[[div_ class="fader"]]
+[[iframe https://scp-jp.github.io/files/util/common/credit/backmodule/start.html ]]
+[[/div]]
+
+[[div_ class="modalcontainer"]]
+[[div_ class="modalbox"]]
+[[div_ class="modalbox-title"]]
+++* クレジット
+[[/div]]
+[[div class="credit"]]

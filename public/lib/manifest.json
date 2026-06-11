@@ -1,0 +1,20 @@
+[
+  "component-anomaly-class-bar-source.ftml",
+  "component-anomaly-class-bar.ftml",
+  "component-credit-modal-badge.ftml",
+  "component-customizable-acs.ftml",
+  "component-image-block-base.ftml",
+  "component-image-block-left-base.ftml",
+  "component-image-block-left.ftml",
+  "component-image-block-quoted-base.ftml",
+  "component-image-block-quoted.ftml",
+  "component-image-block.ftml",
+  "credit-backmodule.ftml",
+  "credit-cc4.ftml",
+  "credit-end-preview.ftml",
+  "credit-end.ftml",
+  "credit-otherwise.ftml",
+  "credit-start-preview.ftml",
+  "credit-start.ftml",
+  "credit-style.ftml"
+]

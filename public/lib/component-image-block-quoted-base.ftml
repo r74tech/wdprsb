@@ -1,0 +1,10 @@
+pathname: component:image-block-quoted-base
+title: 画像ブロックベース(引用)
+source: https://scp-jp.wikidot.com/component:image-block-quoted-base
+-----
+> [[div class="scp-image-block block-{$align} scp-clear-{$clear}" style="width:{$width}; margin-top: 1.2em;"]]
+> [[image {$name} style="width:{$width};" link={$link}]]
+> [[div class="scp-image-caption" style="width:{$width};"]]
+> {$caption}
+> [[/div]]
+> [[/div]]\

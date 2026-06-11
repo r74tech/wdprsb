@@ -1,0 +1,15 @@
++ demoページ
+
+これは2つ目のサンプルです。{{title}}と{{tags}}をfrontmatterで持っています。
+
++++ このページのfrontmatter
+
+[[code type="text"]]
+pathname: demo
+title: demo
+tags: sample
+-----
+本文…
+[[/code]]
+
+{{[[[start]]]}}のページから{{[[[demo]]]}}リンクや{{[[include demo]]}}で参照されています。

@@ -1,0 +1,10 @@
+pathname: component:image-block-base
+title: 画像ブロックベース
+source: https://scp-jp.wikidot.com/component:image-block-base
+-----
+[[div class="scp-image-block block-{$align} scp-clear-{$clear}" style="width:{$width};"]]
+[[image {$name} {$alt}="{$alt-text}" link={$link}]]
+[[div class="scp-image-caption"]]
+{$caption}
+[[/div]]
+[[/div]]

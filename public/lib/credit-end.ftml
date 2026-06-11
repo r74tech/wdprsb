@@ -1,0 +1,30 @@
+pathname: credit:end
+title: クレジット付き評価モジュール：end
+source: https://scp-jp.wikidot.com/credit:end
+-----
+[[div_ class="credit-back" style="text-align: center;"]]
+[[iframe https://scp-jp.github.io/files/util/common/credit/backmodule/end.html style="height:2em;width: 100%;margin: 0;padding: 0;border: 0;background: transparent;" scrolling="no"]]
+[[/div]]
+[[/div]]
+
+[[div_ class="creditBottomRate" style="height:30px;"]]
+[[div_ class="credit-license"]]
+[[a href="*https://creativecommons.org/licenses/by-sa/3.0/deed.ja" class="cc cc-by-sa"]]@@@@[[/a]]
+[[/div]]
+[[div_ style="text-align: center; top: 0px;"]]
+[[div_ [[iftags +殿堂入り]]style="display: flex;"[[/iftags]] class="Dendo"]]
+[[div_ class="heritage-rating-module"]]
+[[div_ class="heritage-emblem"]]
+[[image http://scp-jp.wdfiles.com/local--files/component:heritage-rating/scp-heritage-v3.png link="[[iftags +殿堂入り +en]]heritage-collection-arc[[/iftags]][[iftags +殿堂入り +fr]]patrimoine-francais-de-la-fondation-scp[[/iftags]][[iftags +殿堂入り +jp]]heritage-collection-jp[[/iftags]]" style=" max-width: none;"]]
+[[/div]]
+[[module Rate]]
+[[/div]]
+[[/div]]
+[[div_ [[iftags +殿堂入り]]style="display:none;"[[/iftags]]]]
+[[module Rate]]
+[[/div]]
+[[/div]]
+[[/div]]
+[[/div]]
+[[/div]]
+[[/div]]

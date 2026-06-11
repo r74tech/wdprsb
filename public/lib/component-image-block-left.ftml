@@ -1,0 +1,5 @@
+pathname: component:image-block-left
+title: 標準画像ブロック（左）
+source: https://scp-jp.wikidot.com/component:image-block-left
+-----
+[[include component:image-block-left-base name={$name}|caption={$caption}|width={$width}|width=300px|clear={$clear}|clear=false]]

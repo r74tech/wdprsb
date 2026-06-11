@@ -1,0 +1,5 @@
+pathname: component:image-block
+title: 標準画像ブロック
+source: https://scp-jp.wikidot.com/component:image-block
+-----
+[[include :scp-jp:component:image-block-base name={$name}|caption={$caption}|width={$width}|width=300px|link={$link}|link=#|align={$align}|align=right|clear={$clear}|clear=false]]

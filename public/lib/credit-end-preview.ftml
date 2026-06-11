@@ -1,0 +1,22 @@
+pathname: credit:end-preview
+title: クレジット付き評価モジュール：end(プレビュー用)
+source: https://scp-jp.wikidot.com/credit:end-preview
+-----
+[[div_ class="credit-back" style="text-align: center;"]]
+[[iframe https://scp-jp.github.io/files/util/common/credit/backmodule/end.html style="height:2em;width: 100%;margin: 0;padding: 0;border: 0;background: transparent;" scrolling="no"]]
+[[/div]]
+[[/div]]
+
+[[div_ class="creditBottomRate" style="height:30px;"]]
+[[div_ class="credit-license"]]
+[[a href="*https://creativecommons.org/licenses/by-sa/3.0/deed.ja" class="cc cc-by-sa"]]@@@@[[/a]]
+[[/div]]
+[[div_ style="text-align: center; top: 0px;"]]
+[[div_]]
+[[module Rate]]
+[[/div]]
+[[/div]]
+[[/div]]
+[[/div]]
+[[/div]]
+[[/div]]

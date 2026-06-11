@@ -1,0 +1,63 @@
++ wdpr sandbox
+
+**Wikidot**マークアップのライブプレビューです。左で書くと右で//レンダリング//されます。
+
++++ 基本
+
+* {{**bold**}} {{//italic//}} {{__underline__}}
+* 見出しは{{+}} {{++}} {{+++}}
+* リンクは{{[[[pathname | label]]]}}
+
++++ URLで複数ページを読み込む
+
+{{?src=}}クエリでリモートのページを束ねて読み込めます。カンマ区切りでも{{&src=}}繰り返しでもOK。先頭がエントリページです。
+
+[[code type="text"]]
+?src=https://example.com/a.txt,https://example.com/b.txt
+?src=https://example.com/a.txt&src=https://example.com/b.txt
+[[/code]]
+
+制限: http(s)のみ / 件数20 / 1件1MB / 取得失敗は明示エラー。
+
++++ ページの形式(frontmatter + 区切り + 本文)
+
+各ファイルはfrontmatterで{{pathname}}や{{title}}、{{tags}}を宣言し、5本以上のハイフン{{-----}}で本文と区切ります。
+
+[[code type="text"]]
+pathname: my-page
+title: マイページ
+tags: sample demo
+-----
++ 本文
+ここから先がWikitext
+[[/code]]
+
+{{pathname}}省略時はURL末尾のファイル名(拡張子除く)が使われます。{{pathname}}が{{[[include]]}}や{{[[[link]]]}}の解決キーです。
+
++++ コンポーネント
+
+scp-jpでよく使われるコンポーネントが事前読込済みで、{{[[include :scp-jp:…]]}}で参照できます(タブには出ません)。
+
+* {{credit:start}} / {{credit:end}}(クレジット付き評価モジュール)
+* {{component:image-block}}系(画像ブロック)
+* {{component:anomaly-class-bar}}(ACS)
+* {{component:customizable-acs}}
+
++++ 内部/外部リンク
+
+{{[[[other-page]]]}}形式の内部リンクは、storeに該当ページがあればサンドボックス内で切替、無ければオレンジ色(newpage)表示。外部リンクは新規タブで開きます。
+
++++ UI
+
+* 中央バーをドラッグ: 二画面の幅を調整
+* Result右上{{⟨}}: コードを隠す / Wikidot右上{{⟩}}: プレビューを隠す
+* 隠した側の縦帯をクリックで再表示
+
++++ 複数ページ
+
+上部のタブで{{[[[demo]]]}}に切り替えると、別のページが見えます。
+下の埋め込みは{{[[include demo]]}}した結果です。
+
+----
+
+[[include demo]]
