@@ -163,6 +163,30 @@ export default function App() {
         <div className="topbar-meta">Wikidot live preview</div>
         <button
           type="button"
+          className="open-in-new-tab"
+          onClick={() => {
+            window.open(window.location.href, "_blank", "noopener,noreferrer");
+          }}
+          title="現在のURLを新規タブで開く"
+          aria-label="新規タブで開く"
+        >
+          <svg
+            viewBox="0 0 16 16"
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M9 3h4v4" />
+            <path d="M13 3l-6 6" />
+            <path d="M11 8.5v3.5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h3.5" />
+          </svg>
+        </button>
+        <button
+          type="button"
           className={devtoolsEnabled ? "devtools-toggle active" : "devtools-toggle"}
           onClick={() => {
             if (devtoolsEnabled) {
