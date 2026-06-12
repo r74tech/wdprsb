@@ -9,13 +9,35 @@
  * - 1MB 上限
  * - Cache-Control: 短時間キャッシュ
  *
+ * 全 response (成功/エラー問わず) に Access-Control-Allow-Origin: * を必ず付与する。
+ *
+ * Deploy:
+ *   cd workers/cors-proxy && bunx wrangler deploy
+ *   または Cloudflare dashboard で worker を作って worker.js の内容を貼り付け、
+ *   route を cors-proxy.r74.tech/* に紐付け。
  */
 
 const ALLOWED_HOSTS = [
   "wdfiles.com",
   "wikidot.com",
+  "scp-jp.wikidot.com",
+  "pseudo-scp-jp.wikidot.com",
 ];
 const MAX_BYTES = 1_000_000;
+
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Max-Age": "86400",
+};
+
+/** 全 response に必ず CORS header を付ける helper。 */
+function corsResponse(body, init = {}) {
+  const headers = new Headers(init.headers || {});
+  for (const [k, v] of Object.entries(CORS_HEADERS)) headers.set(k, v);
+  return new Response(body, { ...init, headers });
+}
 
 export default {
   /**
@@ -25,35 +47,28 @@ export default {
     const url = new URL(request.url);
 
     if (request.method === "OPTIONS") {
-      return new Response(null, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Max-Age": "86400",
-        },
-      });
+      return corsResponse(null, { status: 204 });
     }
     if (request.method !== "GET") {
-      return new Response("Method not allowed", { status: 405 });
+      return corsResponse("Method not allowed", { status: 405 });
     }
 
     const target = url.searchParams.get("url");
     if (!target) {
-      return new Response("Missing url query parameter", { status: 400 });
+      return corsResponse("Missing url query parameter", { status: 400 });
     }
 
     let targetUrl;
     try {
       targetUrl = new URL(target);
     } catch {
-      return new Response("Invalid url", { status: 400 });
+      return corsResponse("Invalid url", { status: 400 });
     }
     if (targetUrl.protocol !== "http:" && targetUrl.protocol !== "https:") {
-      return new Response("Only http(s) is supported", { status: 400 });
+      return corsResponse("Only http(s) is supported", { status: 400 });
     }
     if (!ALLOWED_HOSTS.some((h) => targetUrl.hostname === h || targetUrl.hostname.endsWith("." + h))) {
-      return new Response("Host not allowed", { status: 403 });
+      return corsResponse("Host not allowed", { status: 403 });
     }
 
     let upstream;
@@ -64,18 +79,17 @@ export default {
         cf: { cacheTtl: 60, cacheEverything: true },
       });
     } catch (err) {
-      return new Response("Upstream fetch failed: " + (err && err.message), { status: 502 });
+      return corsResponse("Upstream fetch failed: " + (err && err.message), { status: 502 });
     }
 
     const text = await upstream.text();
     if (text.length > MAX_BYTES) {
-      return new Response("Response too large", { status: 413 });
+      return corsResponse("Response too large", { status: 413 });
     }
 
-    return new Response(text, {
+    return corsResponse(text, {
       status: upstream.status,
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": upstream.headers.get("content-type") ?? "text/plain; charset=utf-8",
         "Cache-Control": "public, max-age=60",
       },
