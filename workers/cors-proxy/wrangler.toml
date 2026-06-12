@@ -1,0 +1,5 @@
+name = "cors-proxy"
+main = "worker.js"
+compatibility_date = "2026-06-01"
+
+routes = ["cors-proxy.r74.tech/*"]

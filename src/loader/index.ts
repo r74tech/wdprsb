@@ -50,19 +50,38 @@ function fallbackPathname(url: string): string {
   }
 }
 
+/** CORS proxy として動かす Cloudflare Worker のエンドポイント。 ?url=<encoded> を受ける。 */
+const CORS_PROXY_URL = "https://cors-proxy.r74.tech/";
+
+/**
+ * 直接 fetch を試み, CORS error / network error なら自前 Cloudflare Worker proxy 経由で再 fetch する.
+ * wdfiles.com 等 Access-Control-Allow-Origin を返さない wikidot host への対応.
+ */
+async function fetchTextWithCorsFallback(
+  url: string,
+): Promise<{ text: string; declaredLength: string | null }> {
+  try {
+    const res = await fetch(url, { credentials: "omit", redirect: "follow" });
+    if (res.ok) {
+      return { text: await res.text(), declaredLength: res.headers.get("content-length") };
+    }
+  } catch {
+    // CORS / network → proxy にフォールバック
+  }
+  const proxied = `${CORS_PROXY_URL}?url=${encodeURIComponent(url)}`;
+  const res = await fetch(proxied, { credentials: "omit", redirect: "follow" });
+  if (!res.ok) throw new Error(`HTTP ${res.status} (proxy)`);
+  return { text: await res.text(), declaredLength: res.headers.get("content-length") };
+}
+
 async function fetchPage(url: string): Promise<PageData> {
   if (!isAllowedUrl(url)) {
     throw new Error("http(s)のURLのみ読み込めます");
   }
-  const res = await fetch(url, { credentials: "omit", redirect: "follow" });
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status}`);
-  }
-  const declaredLength = res.headers.get("content-length");
+  const { text, declaredLength } = await fetchTextWithCorsFallback(url);
   if (declaredLength && Number(declaredLength) > MAX_BYTES) {
     throw new Error("サイズ上限(1MB)を超えています");
   }
-  const text = await res.text();
   if (text.length > MAX_BYTES) {
     throw new Error("サイズ上限(1MB)を超えています");
   }
