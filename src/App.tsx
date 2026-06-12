@@ -41,7 +41,17 @@ export default function App() {
   const [loading, setLoading] = useState(initialUrls.length > 0);
   const [loadErrors, setLoadErrors] = useState<LoadError[]>([]);
   const [result, setResult] = useState<RenderResult>({ html: "" });
-  const [collapsed, setCollapsed] = useState<Collapsed>("none");
+  // 初期表示モードを ?view= URL パラメータから決定:
+  //   ?view=both    → 両方表示 (default)
+  //   ?view=preview → プレビューのみ (= editor collapsed)
+  //   ?view=editor  → エディターのみ (= preview collapsed)
+  const initialCollapsed = useMemo<Collapsed>(() => {
+    const view = new URLSearchParams(window.location.search).get("view");
+    if (view === "preview" || view === "result") return "editor";
+    if (view === "editor" || view === "code") return "preview";
+    return "none";
+  }, []);
+  const [collapsed, setCollapsed] = useState<Collapsed>(initialCollapsed);
   const [ratio, setRatio] = useState(0.5);
   const [dragging, setDragging] = useState(false);
   const workspaceRef = useRef<HTMLDivElement>(null);
