@@ -14,6 +14,7 @@ import { getPage, hasPage, type PageStore } from "./store";
 // allowHtmlBlocks=falseで [[html]] ブロックを無効化（静的ホスティングでiframeのsrc配信不可のため）。
 const SETTINGS: WikitextSettings = {
   ...createSettings("page"),
+  allowStyleElements: true,
   allowHtmlBlocks: false,
 };
 
